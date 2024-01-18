@@ -10,6 +10,11 @@ namespace Yaml2TypeScript.Processor
         public static string RootGenerationPath { get; set; }
         public static DirectoryInfo GetRootGenerationDirectory()
         {
+            if(string.IsNullOrWhiteSpace(RootGenerationPath))
+            {
+                throw new ArgumentNullException(nameof(RootGenerationPath));
+            }
+
             var directory = new DirectoryInfo(RootGenerationPath);
             if (!directory.Exists)
             {
@@ -40,6 +45,35 @@ namespace Yaml2TypeScript.Processor
             return ids;
         }
 
+        public static string GetTypeScriptFieldTypeForImport(FieldType fieldType)
+        {
+            switch (fieldType)
+            {
+                case FieldType.SingleLineText:
+                case FieldType.MultiLineText:
+                case FieldType.RichText:
+                    return "Field";
+                case FieldType.GeneralLink:
+                    return "LinkField";
+                case FieldType.Image:
+                    return "ImageField";
+                case FieldType.ItemReference:
+                    return ConfigLoader.GetBaseItemClassName();
+                case FieldType.Checkbox:
+                    return "Field";
+                case FieldType.Integer:
+                case FieldType.Number:
+                    return "Field";
+                case FieldType.Date:
+                    return "DateField";
+                case FieldType.ItemReferenceArray:
+                    return $"{ConfigLoader.GetBaseItemClassName()}[]";
+                default:
+                    // "Unknown";
+                    return string.Empty;
+            }
+        }
+
         public static string GetTypeScriptFieldType(FieldType fieldType)
         {
             switch (fieldType)
@@ -53,7 +87,7 @@ namespace Yaml2TypeScript.Processor
                 case FieldType.Image:
                     return "ImageField";
                 case FieldType.ItemReference:
-                    return "Item";
+                    return ConfigLoader.GetBaseItemClassName();
                 case FieldType.Checkbox:
                     return "Field<boolean>";
                 case FieldType.Integer:
@@ -62,11 +96,10 @@ namespace Yaml2TypeScript.Processor
                 case FieldType.Date:
                     return "DateField";
                 case FieldType.ItemReferenceArray:
-                    return "Item[]";
+                    return $"{ConfigLoader.GetBaseItemClassName()}[]";
                 default:
                     // "Unknown";
                     return string.Empty;
-
             }
         }
     }

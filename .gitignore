@@ -5,5 +5,4 @@
 /.vs/*
 /Yaml2TypeScript/bin/*
 /Yaml2TypeScript/obj/*
-/Yaml2TypeScript/App.config.CNH
-/Yaml2TypeScript/App.config.SunCoast
+/Yaml2TypeScript/App.config.*

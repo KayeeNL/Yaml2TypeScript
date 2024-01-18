@@ -62,7 +62,8 @@ namespace Yaml2TypeScript.Processor
 
             if (item?.Fields?.Length > 0)
             {
-                var allFieldsTypes = item.Fields.Select(x => ProcessorUtils.GetTypeScriptFieldType(x.FieldType)).Where(x => !string.IsNullOrEmpty(x)).ToArray() ?? [];
+                // remove import of Item[] because that's not a OOB type
+                var allFieldsTypes = item.Fields.Where(x => x.FieldType != FieldType.ItemReferenceArray && x.FieldType != FieldType.ItemReference).Select(x => ProcessorUtils.GetTypeScriptFieldTypeForImport(x.FieldType)).Where(x => !string.IsNullOrEmpty(x)).ToArray() ?? [];
                 HashSet<string> uniqueValues = new HashSet<string>(allFieldsTypes);
                 string importLine = string.Join(", ", uniqueValues.ToArray().Order());
 
@@ -71,6 +72,12 @@ namespace Yaml2TypeScript.Processor
                     importLine = $"import {{ {importLine} }} from '@sitecore-jss/sitecore-jss-nextjs';";
                 }
                 result.AppendLine(importLine);
+
+                var hasItemReference = item.Fields.Any(x => x.FieldType == FieldType.ItemReferenceArray || x.FieldType == FieldType.ItemReference);
+                if (hasItemReference)
+                {
+                    result.AppendLine($"import {{ {ConfigLoader.GetBaseItemClassName()} }} from '{ConfigLoader.GetBaseItemClassImportRelativePath()}';");
+                }
             }
 
             result.AppendLine();
@@ -92,11 +99,12 @@ namespace Yaml2TypeScript.Processor
                 result.AppendLine(" {");
                 result.AppendLine("  fields: {");
                 result.AppendLine("    " + string.Join($"{Environment.NewLine}    ", fieldStrings));
-                result.AppendLine("  }");
+                result.AppendLine("  };");
                 result.Append("}");
             }
 
             result.Append(";");
+            result.AppendLine();
 
             return result.ToString();
         }
