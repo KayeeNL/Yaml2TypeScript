@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Yaml2TypeScript;
-using Yaml2TypeScript.Processor;
+using SitecoreTypeScriptGenerator;
+using SitecoreTypeScriptGenerator.Processor;
 
 ProcessorUtils.RootGenerationPath = ConfigLoader.GetRootGenerationPath() ?? string.Empty;
 

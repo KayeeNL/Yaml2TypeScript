@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs/*
-/Yaml2TypeScript/bin/*
-/Yaml2TypeScript/obj/*
-/Yaml2TypeScript/App.config.*
+/SitecoreTypeScriptGenerator/bin/*
+/SitecoreTypeScriptGenerator/obj/*
+/SitecoreTypeScriptGenerator/App.config.*
+/SitecoreTypeScriptGenerator/appsettings.json.*

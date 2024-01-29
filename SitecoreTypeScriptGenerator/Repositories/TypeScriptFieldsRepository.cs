@@ -1,8 +1,8 @@
 ﻿
-using Yaml2TypeScript.Models.TypeScript;
-using Yaml2TypeScript.Processor;
+using SitecoreTypeScriptGenerator.Models.TypeScript;
+using SitecoreTypeScriptGenerator.Processor;
 
-namespace Yaml2TypeScript.Repositories
+namespace SitecoreTypeScriptGenerator.Repositories
 {
     internal class TypeScriptFieldsRepository
     {

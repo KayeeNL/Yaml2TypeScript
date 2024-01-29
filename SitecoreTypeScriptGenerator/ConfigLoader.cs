@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Yaml2TypeScript
+namespace SitecoreTypeScriptGenerator
 {
     internal class ConfigLoader
     {

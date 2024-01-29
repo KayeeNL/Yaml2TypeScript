@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using Yaml2TypeScript.Models.TypeScript;
-using Yaml2TypeScript.Repositories;
+using SitecoreTypeScriptGenerator.Models.TypeScript;
+using SitecoreTypeScriptGenerator.Repositories;
 
-namespace Yaml2TypeScript.Processor
+namespace SitecoreTypeScriptGenerator.Processor
 {
     internal class GenerateTypeScriptFiles2
     {

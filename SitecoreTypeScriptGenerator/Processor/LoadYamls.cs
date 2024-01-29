@@ -1,8 +1,8 @@
 ﻿
-using Yaml2TypeScript.Models;
-using Yaml2TypeScript.Repositories;
+using SitecoreTypeScriptGenerator.Models;
+using SitecoreTypeScriptGenerator.Repositories;
 
-namespace Yaml2TypeScript.Processor
+namespace SitecoreTypeScriptGenerator.Processor
 {
     internal class LoadYamls
     {

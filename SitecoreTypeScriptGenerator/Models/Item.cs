@@ -1,7 +1,7 @@
 ﻿
-using Yaml2TypeScript.Models;
+using SitecoreTypeScriptGenerator.Models;
 
-namespace Yaml2TypeScript.Processor
+namespace SitecoreTypeScriptGenerator.Processor
 {
     internal class Item : Base
     {

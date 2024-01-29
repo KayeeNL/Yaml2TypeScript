@@ -1,7 +1,7 @@
 ﻿
-using Yaml2TypeScript.Models.TypeScript;
+using SitecoreTypeScriptGenerator.Models.TypeScript;
 
-namespace Yaml2TypeScript.Processor
+namespace SitecoreTypeScriptGenerator.Processor
 {
     internal class ProcessorUtils
     {

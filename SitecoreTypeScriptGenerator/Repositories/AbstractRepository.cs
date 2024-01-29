@@ -1,7 +1,7 @@
 ﻿
-using Yaml2TypeScript.Processor;
+using SitecoreTypeScriptGenerator.Processor;
 
-namespace Yaml2TypeScript.Repositories
+namespace SitecoreTypeScriptGenerator.Repositories
 {
     internal abstract class AbstractRepository<T> where T : Item
     {

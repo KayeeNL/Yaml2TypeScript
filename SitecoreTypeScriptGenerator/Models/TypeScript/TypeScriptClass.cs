@@ -1,5 +1,5 @@
 ﻿
-namespace Yaml2TypeScript.Models.TypeScript
+namespace SitecoreTypeScriptGenerator.Models.TypeScript
 {
     internal class TypeScriptClass
     {

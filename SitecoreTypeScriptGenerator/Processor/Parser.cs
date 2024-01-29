@@ -1,7 +1,7 @@
 ﻿
 using YamlDotNet.Serialization;
 
-namespace Yaml2TypeScript.Processor
+namespace SitecoreTypeScriptGenerator.Processor
 {
     internal class ItemParser
     {

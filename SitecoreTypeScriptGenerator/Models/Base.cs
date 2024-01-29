@@ -1,5 +1,5 @@
 ﻿
-namespace Yaml2TypeScript.Models
+namespace SitecoreTypeScriptGenerator.Models
 {
     internal class Base : CalculatedModel
     {
