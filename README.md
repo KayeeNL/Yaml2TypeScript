@@ -76,6 +76,12 @@ Use the config options below to specify your own custom "BaseItem" TypeScript cl
 - OverrideBaseItemClassImportRelativePath
 
 ### Example output:
+Base class itself
+```
+export type BaseItem = {};
+```
+
+Usage of Base class
 ```
 
 import { BaseItem } from 'generatedTypeScript/BaseItem.type.ts';
