@@ -10,8 +10,9 @@ namespace SitecoreTypeScriptGenerator
     {
         public string? GeneratedFilesOutputPath { get; set; }
         public string?[]? YamlIncludePathsPiped { get; set; }
-        public string? BaseItemClassName { get; set; }
-        public string? BaseItemClassImportRelativePath { get; set; }
+
+        public string? OverrideBaseItemClassName { get; set; }
+        public string? OverrideBaseItemClassImportRelativePath { get; set; }
 
 
         public string? ApplicationWorkingDirectory { get; set; }

@@ -36,8 +36,9 @@ namespace SitecoreTypeScriptGenerator.Processor
                 if(!string.IsNullOrEmpty(contents))
                 {
                     string fileName = item.FilePath;
+                    string fileType = File.Exists(fileName) ? "updated" : "created";
                     File.WriteAllText(fileName, contents);
-                    Console.WriteLine($"wrote: {fileName}");
+                    Console.WriteLine($"[info] {fileType}: {item.RelativeFilePath}");
                     filesWritten++;
                 }                
             }
@@ -50,7 +51,7 @@ namespace SitecoreTypeScriptGenerator.Processor
             if(item?.Fields?.Length== 0 &&
                 item?.InheritenceClasses?.Length == 0) 
             {
-                Console.WriteLine($"warning: class {item?.ClassName} no fields and no base classes. {item?.SitecoreId}");
+                Console.WriteLine($"[warning] {item?.ClassName} no fields and no base classes. Id: {item?.SitecoreId}");
                 return string.Empty;
             }
 

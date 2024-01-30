@@ -125,7 +125,7 @@ namespace SitecoreTypeScriptGenerator.Repositories
                     guid != new Guid("8ca06d6a-b353-44e8-bc31-b528c7306971"))
                 {
                     // system template
-                    Console.WriteLine($"Missing key.....{guid}");
+                    Console.WriteLine($"[info] Unable to resolve template with id: {guid}");
                 }
                 return null;
             }

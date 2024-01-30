@@ -5,10 +5,14 @@ using SitecoreTypeScriptGenerator.Processor;
 
 ProcessorUtils.RootGenerationPath = ConfigLoader.GetRootGenerationPath() ?? string.Empty;
 
+Console.WriteLine();
+Console.WriteLine("[info] Loading Yaml files");
 LoadYamls.Load(ConfigLoader.GetYamlLoadPaths());
+Console.WriteLine("[info] Yaml files loaded");
 
 var filesWritten = GenerateTypeScriptFiles2.Generate();
 Console.WriteLine();
-Console.WriteLine($"Completed. {filesWritten} files written");
+Console.WriteLine($"Finshed. {filesWritten} files written");
 Console.WriteLine();
-Console.WriteLine("! I recommend linting after generating these files!");
+Console.WriteLine("~~~ I recommend linting after generating these files!");
+Console.WriteLine();
