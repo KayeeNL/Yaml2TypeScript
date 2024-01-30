@@ -7,7 +7,7 @@ ProcessorUtils.RootGenerationPath = ConfigLoader.GetRootGenerationPath() ?? stri
 
 Console.WriteLine();
 Console.WriteLine("[info] Loading Yaml files");
-LoadYamls.Load(ConfigLoader.GetYamlLoadPaths());
+LoadYamls.Load(ConfigLoader.GetYamlLoadPaths(), ConfigLoader.GetYamlExcludePaths());
 Console.WriteLine("[info] Yaml files loaded");
 
 var filesWritten = GenerateTypeScriptFiles2.Generate();

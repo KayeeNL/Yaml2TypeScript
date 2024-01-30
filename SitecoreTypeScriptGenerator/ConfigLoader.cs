@@ -22,7 +22,7 @@ namespace SitecoreTypeScriptGenerator
 
             string workingDirectory = System.Environment.CurrentDirectory;
             string generatedFilesOutputPath = Config["GeneratedFilesOutputPath"];
-            if(generatedFilesOutputPath != null &&  generatedFilesOutputPath.StartsWith(".\\"))
+            if (generatedFilesOutputPath != null &&  generatedFilesOutputPath.StartsWith(".\\"))
             {
                 generatedFilesOutputPath = Path.Combine(workingDirectory, generatedFilesOutputPath.Substring(2));
             }
@@ -36,13 +36,14 @@ namespace SitecoreTypeScriptGenerator
             if (string.IsNullOrWhiteSpace(overrideBaseItemClassName) &&
                 string.IsNullOrWhiteSpace(overrideBaseItemImportPath))
             {
+                var folderRoot = new DirectoryInfo(generatedFilesOutputPath);
                 overrideBaseItemClassName = DefaultBaseItemClassName;
-                overrideBaseItemImportPath = generatedFilesOutputPath ?? $"/{overrideBaseItemClassName}.type.ts";
+                overrideBaseItemImportPath = $"{folderRoot.Name}/{overrideBaseItemClassName}.type.ts";
 
-                string baseOutputPath = Path.Combine(generatedFilesOutputPath, $"{overrideBaseItemClassName}.type.ts");
+                string baseClassFilePath = Path.Combine(generatedFilesOutputPath, $"{overrideBaseItemClassName}.type.ts");
 
-                Console.WriteLine($"Generating default base class: {baseOutputPath}");
-                File.WriteAllText(baseOutputPath, $"export type {overrideBaseItemClassName} = {{}};");
+                Console.WriteLine($"Generating default base class: {baseClassFilePath}");
+                File.WriteAllText(baseClassFilePath, $"export type {overrideBaseItemClassName} = {{}};");
             }
 
             Model = new AppConfigModel
@@ -50,6 +51,7 @@ namespace SitecoreTypeScriptGenerator
                 ApplicationWorkingDirectory = System.Environment.CurrentDirectory,
                 GeneratedFilesOutputPath = generatedFilesOutputPath,
                 YamlIncludePathsPiped = GetYamlLoadPaths(workingDirectory, Config.GetSection("YamlIncludePathsPiped")),
+                YamlExcludePathsPiped = GetYamlLoadPaths(workingDirectory,Config.GetSection("YamlExcludePathsPiped")),
                 OverrideBaseItemClassName = overrideBaseItemClassName,
                 OverrideBaseItemClassImportRelativePath = overrideBaseItemImportPath
             };
@@ -90,6 +92,11 @@ namespace SitecoreTypeScriptGenerator
         public static string?[] GetYamlLoadPaths()
         {
             return Model.YamlIncludePathsPiped ?? new string?[0];
+        }
+
+        public static string?[] GetYamlExcludePaths()
+        {
+            return Model.YamlExcludePathsPiped ?? new string?[0];
         }
 
         public static string GetBaseItemClassName()

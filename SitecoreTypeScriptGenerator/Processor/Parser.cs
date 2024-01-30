@@ -7,7 +7,7 @@ namespace SitecoreTypeScriptGenerator.Processor
     {
         private static readonly IDeserializer _deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
 
-        public static T? ParseFile<T>(string path) where T : Item
+        public static T? ParseFile<T>(string path, bool logDetails = false) where T : Item
         {
             if(!File.Exists(path))
             {
@@ -20,9 +20,15 @@ namespace SitecoreTypeScriptGenerator.Processor
                 var item = _deserializer.Deserialize<T>(yaml);
                 return item;
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                Console.WriteLine($"failed to parse file: {path}");
+                Console.WriteLine($"[warning] failed to parse file: {path}");
+                if (logDetails)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(ex);
+                    Console.WriteLine();
+                }
             }
 
             return null;

@@ -12,22 +12,28 @@ namespace SitecoreTypeScriptGenerator.Processor
         
         private const string TemplateSectionId = "e269fbb5-3750-427a-9149-7aa950b49301";
 
-        public static void Load(string[] rootPaths)
+        public static void Load(string[] rootPaths, string[] excludePaths)
         {
             ProcessorUtils.GetRootGenerationDirectory();
 
             foreach (var path in rootPaths)
             {
                 var directory = new DirectoryInfo(path);
-                LoadFolder(directory);
+                LoadFolder(directory, excludePaths);
             }
         }       
 
-        private static void LoadFolder(DirectoryInfo folder)
+        private static void LoadFolder(DirectoryInfo folder, string[] excludePaths)
         {
             var repoItems = new ItemRepository();
             var repoSections = new FieldSectionRepository();
             var repoFields = new FieldRepository();
+
+            if(excludePaths.Any(x => folder.FullName.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) > 0))
+            {
+                Console.WriteLine($"[info] folder excluded: {folder.FullName}");
+                return;
+            }
 
             var files = folder.GetFiles(YamlSearchPattern) ?? [];
             foreach (var file in files) 
@@ -73,7 +79,7 @@ namespace SitecoreTypeScriptGenerator.Processor
 
             foreach(var sub in folder.GetDirectories())
             {
-                LoadFolder(sub);
+                LoadFolder(sub, excludePaths);
             }
         }
 
@@ -116,7 +122,7 @@ namespace SitecoreTypeScriptGenerator.Processor
             if(subFolders.Length != 1)
             {
                 //throw new Exception("Expected fields folder. Something is wrong");
-                Console.WriteLine($"Expected fields folder: {folder} name: {name}");
+                Console.WriteLine($"[warning] Expected fields folder: {folder} name: {name}");
                 return null;
             }
 
